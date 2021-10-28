@@ -66,17 +66,6 @@
                 buyer
                 optionToken
               }
-              balanceUpdates(
-                first:1
-                where: {
-                  vault: "0x0fabaf48bbf864a3947bdd0ba9d764791a60467a"
-                }
-                orderBy:timestamp 
-                orderDirection: desc
-              ){
-                  balance
-                  yieldEarned
-                }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -140,17 +129,6 @@
                 buyer
                 optionToken
               }
-              balanceUpdates(
-                first: 1
-                where: {
-                  vault: "0x8b5876f5b0bf64056a89aa7e97511644758c3e8c"
-                }
-                orderBy:timestamp 
-                orderDirection: desc
-              ){
-                  balance
-                  yieldEarned
-                }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -214,17 +192,6 @@
                 buyer
                 optionToken
               }
-              balanceUpdates(
-                first:1
-                where: {
-                  vault: "0x16772a7f4a3ca291c21b8ace76f9332ddffbb5ef"
-                }
-                orderBy:timestamp 
-                orderDirection: desc
-              ){
-                  balance
-                  yieldEarned
-                }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -287,17 +254,6 @@
                 buyer
                 optionToken
               }
-              balanceUpdates(
-                first:1
-                where: {
-                  vault: "0x8fe74471f198e426e96be65f40eed1f8ba96e54f"
-                }
-                orderBy:timestamp 
-                orderDirection: desc
-              ){
-                  balance
-                  yieldEarned
-                }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
