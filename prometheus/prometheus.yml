@@ -257,3 +257,51 @@
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+    - job_name: "rETH-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rETH-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+    - job_name: "rBTC-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rBTC-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
