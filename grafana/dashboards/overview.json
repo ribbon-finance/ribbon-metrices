@@ -1,1345 +1,1834 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": "-- Grafana --",
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [],
-            "type": "dashboard"
-          },
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
           "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "gnetId": null,
-    "graphTooltip": 0,
-    "id": 6,
-    "links": [],
-    "liveNow": false,
-    "panels": [
-      {
-        "datasource": null,
-        "gridPos": {
-          "h": 8,
-          "w": 9,
-          "x": 0,
-          "y": 0
         },
-        "id": 15,
-        "options": {
-          "content": "# Ribbon Vault Metrics\n- [ribbon.finance](https://ribbon.finance)\n- [Twitter](https://twitter.com/ribbonfinance)\n- [Discord](https://discord.com/invite/85gcVafPyN)\n- [Metrics](https://github.com/Lucas-Kohorst/theta-vault-metrics)\n\n### Development \nThe metrics are gathered from the [Ribbon Subgraph](https://thegraph.com/explorer/subgraph/kenchangh/ribbon-finance?query=Example%20query) and then scraped via a [graphql-exporter](https://github.com/ricardbejarano/graphql_exporter). ETH price feeds are also pulled in via [cryptowat-exporter](https://github.com/nbarrientos/cryptowat_exporter).\n\nEverything is scraped via [prometheus](https://prometheus.io/) and displayed in [grafana](https://grafana.com/)",
-          "mode": "markdown"
-        },
-        "pluginVersion": "8.2.2",
-        "timeFrom": null,
-        "timeShift": null,
-        "type": "text"
-      },
-      {
-        "datasource": null,
-        "gridPos": {
-          "h": 8,
-          "w": 7,
-          "x": 9,
-          "y": 0
-        },
-        "id": 17,
-        "options": {
-          "folderId": 0,
-          "maxItems": 10,
-          "query": "",
-          "showHeadings": true,
-          "showRecentlyViewed": false,
-          "showSearch": true,
-          "showStarred": false,
-          "tags": []
-        },
-        "pluginVersion": "8.2.2",
-        "timeFrom": null,
-        "timeShift": null,
-        "type": "dashlist"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "decimals": 2,
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 16,
-          "y": 0
-        },
-        "id": 11,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.2.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"}  / 1000000000000000000",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "reth_theta",
-            "refId": "A"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rETH-THETA-v2\"}  / 1000000000000000000",
-            "hide": false,
-            "instant": false,
-            "interval": "",
-            "legendFormat": "reth_theta_v2",
-            "refId": "G"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "eth",
-            "refId": "B"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"}  / 100000000",
-            "hide": false,
-            "instant": false,
-            "interval": "",
-            "legendFormat": "rbtc-theta",
-            "refId": "C"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rBTC-THETA-v2\"}  / 100000000",
-            "hide": false,
-            "instant": false,
-            "interval": "",
-            "legendFormat": "rbtc-theta_v2",
-            "refId": "H"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "btc",
-            "refId": "D"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"}  / 1000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "rUSDC-ETH-P-THETA",
-            "refId": "E"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"}  / 1000000",
-            "hide": false,
-            "instant": false,
-            "interval": "",
-            "legendFormat": "ryvUSDC-ETH-P-THETA",
-            "refId": "F"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "TVL (USD)",
-        "transformations": [
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_reth-theta",
-              "binary": {
-                "left": "reth_theta",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "eth"
-              },
-              "mode": "binary",
-              "reduce": {
-                "include": [],
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_reth-theta-v2",
-              "binary": {
-                "left": "reth_theta_v2",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "eth"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_rbtc-theta",
-              "binary": {
-                "left": "rbtc-theta",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "btc"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_rbtc-theta-v2",
-              "binary": {
-                "left": "rbtc-theta_v2",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "btc"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_v1_usd",
-              "binary": {
-                "left": "tvl_reth-theta",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "tvl_rbtc-theta"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              },
-              "replaceFields": false
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_v2_usd",
-              "binary": {
-                "left": "tvl_reth-theta-v2",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "tvl_rbtc-theta-v2"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_usd",
-              "binary": {
-                "left": "tvl_v1_usd",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "tvl_v2_usd"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "binary": {
-                "left": "tvl_usd",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "rUSDC-ETH-P-THETA"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              },
-              "replaceFields": false
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "binary": {
-                "left": "tvl_usd + rUSDC-ETH-P-THETA",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "ryvUSDC-ETH-P-THETA"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              },
-              "replaceFields": true
-            }
-          }
-        ],
-        "type": "stat"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "smooth",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 8,
-          "x": 0,
-          "y": 8
-        },
-        "id": 32,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "single"
-          }
-        },
-        "pluginVersion": "8.2.2",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"} / 100000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rBTC-THETA-v2\"} / 100000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "G"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "B"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"} / 1000000000000000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "C"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rETH-THETA-v2\"} / 1000000000000000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "H"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "D"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "T-USDC-P-ETH TVL",
-            "refId": "E"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "T-yvUSDC-P-ETH TVL",
-            "refId": "F"
-          }
-        ],
-        "title": "TVL By Vaults",
-        "transformations": [
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "T-WBTC-C TVL",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "T-ETH-C TVL",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "T-WBTC-C V2 TVL",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "T-ETH-C V2 TVL",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "Total": true,
-                "USDC_ETH_P_tvl": false,
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
-                "yvUSDC_ETH_P_tvl": false,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true
-              },
-              "indexByName": {
-                "Time": 0,
-                "Total": 7,
-                "USDC_ETH_P_tvl": 6,
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": 2,
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": 4,
-                "yvUSDC_ETH_P_tvl": 5,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": 1,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": 3
-              },
-              "renameByName": {}
-            }
-          }
-        ],
-        "transparent": true,
-        "type": "timeseries"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "smooth",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 8,
-          "x": 8,
-          "y": 8
-        },
-        "id": 34,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "single"
-          }
-        },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"} / 100000000",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rBTC-THETA-v2\"} / 100000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "B"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "C"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"} / 1000000000000000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "D"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rETH-THETA-v2\"} / 1000000000000000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "E"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "F"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "G"
-          },
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "H"
-          }
-        ],
-        "title": "TVL By Assets",
-        "transformations": [
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_btc_v1",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_btc_v2",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_eth_v1",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_eth_v2",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "TVL by BTC",
-              "binary": {
-                "left": "tvl_btc_v1",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "tvl_btc_v2"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "TVL by ETH",
-              "binary": {
-                "left": "tvl_eth_v1",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "tvl_eth_v2"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "TVL by USDC",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}",
-                "operator": "+",
-                "reducer": "sum",
-                "right": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
-                "tvl_btc_v1": true,
-                "tvl_btc_v2": true,
-                "tvl_eth_v1": true,
-                "tvl_eth_v2": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true
-              },
-              "indexByName": {},
-              "renameByName": {}
-            }
-          }
-        ],
-        "transparent": true,
-        "type": "timeseries"
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 9,
-          "w": 8,
-          "x": 16,
-          "y": 8
-        },
-        "hiddenSeries": false,
-        "id": 2,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "8.2.2",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "$$hashKey": "object:87",
-            "alias": "tvl_usd",
-            "yaxis": 2
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"} / 100000000",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "B"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "rBTC-THETA TVL",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transformations": [
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_usd",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              }
-            }
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "Time": false,
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": false
-              },
-              "indexByName": {},
-              "renameByName": {
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": "tvl_btc"
-              }
-            }
-          }
-        ],
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "$$hashKey": "object:59",
-            "format": "short",
-            "label": "BTC",
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "$$hashKey": "object:60",
-            "format": "short",
-            "label": "USD",
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "graph": false,
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 8,
-          "x": 0,
-          "y": 17
-        },
-        "id": 30,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "single"
-          }
-        },
-        "pluginVersion": "7.5.4",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "tvl",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "ryvUSDC-ETH-P-THETA TVL",
-        "transformations": [],
-        "transparent": true,
-        "type": "timeseries"
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 9,
-          "w": 8,
-          "x": 8,
-          "y": 17
-        },
-        "hiddenSeries": false,
-        "id": 6,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "8.2.2",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "$$hashKey": "object:272",
-            "alias": "tvl_usd",
-            "yaxis": 2
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"}  / 1000000000000000000",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          },
-          {
-            "exemplar": true,
-            "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "B"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "rETH-THETA TVL",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transformations": [
-          {
-            "id": "calculateField",
-            "options": {
-              "alias": "tvl_usd",
-              "binary": {
-                "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}",
-                "operator": "*",
-                "reducer": "sum",
-                "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
-              },
-              "mode": "binary",
-              "reduce": {
-                "reducer": "sum"
-              },
-              "replaceFields": false
-            }
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "Time": false,
-                "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true
-              },
-              "indexByName": {},
-              "renameByName": {
-                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": "tvl_eth"
-              }
-            }
-          }
-        ],
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "$$hashKey": "object:244",
-            "format": "short",
-            "label": "ETH",
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "$$hashKey": "object:245",
-            "format": "short",
-            "label": "USD",
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "graph": false,
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 8,
-          "x": 16,
-          "y": 17
-        },
-        "id": 24,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "single"
-          }
-        },
-        "pluginVersion": "7.5.4",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "tvl",
-            "refId": "A"
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "rUSDC-ETH-P-THETA TVL",
-        "transformations": [],
-        "transparent": true,
-        "type": "timeseries"
+        "type": "dashboard"
       }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 0,
+        "y": 0
+      },
+      "id": 15,
+      "options": {
+        "content": "# Ribbon Vault Metrics\n- [ribbon.finance](https://ribbon.finance)\n- [Twitter](https://twitter.com/ribbonfinance)\n- [Discord](https://discord.com/invite/85gcVafPyN)\n- [Metrics](https://github.com/Lucas-Kohorst/theta-vault-metrics)\n\n### Development \nThe metrics are gathered from the [Ribbon Subgraph](https://thegraph.com/explorer/subgraph/kenchangh/ribbon-finance?query=Example%20query) and then scraped via a [graphql-exporter](https://github.com/ricardbejarano/graphql_exporter). ETH price feeds are also pulled in via [cryptowat-exporter](https://github.com/nbarrientos/cryptowat_exporter).\n\nEverything is scraped via [prometheus](https://prometheus.io/) and displayed in [grafana](https://grafana.com/)",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "type": "text"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 9,
+        "y": 0
+      },
+      "id": 17,
+      "options": {
+        "folderId": 0,
+        "maxItems": 10,
+        "query": "",
+        "showHeadings": true,
+        "showRecentlyViewed": false,
+        "showSearch": true,
+        "showStarred": false,
+        "tags": []
+      },
+      "pluginVersion": "8.2.2",
+      "timeFrom": null,
+      "timeShift": null,
+      "type": "dashlist"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"}  / 1000000000000000000",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "reth_theta",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rETH-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "reth_theta_v2",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "eth",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"}  / 100000000",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "rbtc-theta",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rBTC-THETA-v2\"}  / 100000000",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "rbtc-theta_v2",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "btc",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rUSDC-ETH-P-THETA",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"}  / 1000000",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "ryvUSDC-ETH-P-THETA",
+          "refId": "F"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TVL (USD)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_reth-theta",
+            "binary": {
+              "left": "reth_theta",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "eth"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_reth-theta-v2",
+            "binary": {
+              "left": "reth_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "eth"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_rbtc-theta",
+            "binary": {
+              "left": "rbtc-theta",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "btc"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_rbtc-theta-v2",
+            "binary": {
+              "left": "rbtc-theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "btc"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_v1_usd",
+            "binary": {
+              "left": "tvl_reth-theta",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "tvl_rbtc-theta"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_v2_usd",
+            "binary": {
+              "left": "tvl_reth-theta-v2",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "tvl_rbtc-theta-v2"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_usd",
+            "binary": {
+              "left": "tvl_v1_usd",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "tvl_v2_usd"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "tvl_usd",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "rUSDC-ETH-P-THETA"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "tvl_usd + rUSDC-ETH-P-THETA",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "ryvUSDC-ETH-P-THETA"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 8
+      },
+      "id": 32,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"} / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rBTC-THETA-v2\"} / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rETH-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "T-USDC-P-ETH TVL",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "T-yvUSDC-P-ETH TVL",
+          "refId": "F"
+        }
+      ],
+      "title": "TVL By Vaults",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-WBTC-C TVL",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-ETH-C TVL",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-WBTC-C V2 TVL",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-ETH-C V2 TVL",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Total": true,
+              "USDC_ETH_P_tvl": false,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
+              "yvUSDC_ETH_P_tvl": false,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Total": 7,
+              "USDC_ETH_P_tvl": 6,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": 2,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": 4,
+              "yvUSDC_ETH_P_tvl": 5,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": 1,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": 3
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 8
+      },
+      "id": 34,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"} / 100000000",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rBTC-THETA-v2\"} / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rETH-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "H"
+        }
+      ],
+      "title": "TVL By Assets",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_btc_v1",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_btc_v2",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_eth_v1",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_eth_v2",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TVL by BTC",
+            "binary": {
+              "left": "tvl_btc_v1",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "tvl_btc_v2"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TVL by ETH",
+            "binary": {
+              "left": "tvl_eth_v1",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "tvl_eth_v2"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TVL by USDC",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
+              "tvl_btc_v1": true,
+              "tvl_btc_v2": true,
+              "tvl_eth_v1": true,
+              "tvl_eth_v2": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 8
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"rBTC-THETA\"} / 100000000",
+          "interval": "",
+          "legendFormat": "btc_c_v1_withdrawal_fees",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rBTC-THETA-v2\"} / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "btc_c_v2_fees",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"rETH-THETA\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "eth_c_v1_withdrawal_fees",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rETH-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "eth_c_v2_fees",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "usdc_p_eth_v1_withdrawal_fees",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "yvusdc_p_eth_v1_withdrawal_fees",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "btc_price",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "eth_price",
+          "refId": "H"
+        }
+      ],
+      "title": "Total Fees Collected",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-WBTC-C Withdrawal Fees",
+            "binary": {
+              "left": "btc_c_v1_withdrawal_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "btc_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-ETH-C Withdrawal Fees",
+            "binary": {
+              "left": "eth_c_v1_withdrawal_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "eth_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-WBTC-C V2 Fees",
+            "binary": {
+              "left": "btc_c_v2_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "btc_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-ETH-C V2 Fees",
+            "binary": {
+              "left": "eth_c_v2_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "eth_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "V2 Fees",
+            "binary": {
+              "left": "T-WBTC-C V2 Fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "T-ETH-C V2 Fees"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "T-WBTC-C V2 Fees",
+                "T-ETH-C V2 Fees"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "V1 Withdrawal Fees",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "usdc_p_eth_v1_withdrawal_fees",
+                "T-WBTC-C Withdrawal Fees",
+                "T-ETH-C Withdrawal Fees",
+                "yvusdc_p_eth_v1_withdrawal_fees"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Fees Collected",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "V2 Fees",
+                "V1 Withdrawal Fees"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "T-ETH-C V2 Fees": true,
+              "T-ETH-C Withdrawal Fees": true,
+              "T-WBTC-C V2 Fees": true,
+              "T-WBTC-C Withdrawal Fees": true,
+              "Time": false,
+              "btc_c_v1_withdrawal_fees": true,
+              "btc_c_v2_fees": true,
+              "btc_price": true,
+              "eth_c_v1_withdrawal_fees": true,
+              "eth_c_v2_fees": true,
+              "eth_price": true,
+              "usdc_p_eth_v1_withdrawal_fees": true,
+              "yvusdc_p_eth_v1_withdrawal_fees": true
+            },
+            "indexByName": {
+              "T-ETH-C V2 Fees": 12,
+              "T-ETH-C Withdrawal Fees": 10,
+              "T-WBTC-C V2 Fees": 11,
+              "T-WBTC-C Withdrawal Fees": 9,
+              "Time": 0,
+              "Total Fees Collected": 13,
+              "V1 Withdrawal Fees": 14,
+              "V2 Fees": 15,
+              "btc_c_v1_withdrawal_fees": 1,
+              "btc_c_v2_fees": 2,
+              "btc_price": 7,
+              "eth_c_v1_withdrawal_fees": 3,
+              "eth_c_v2_fees": 4,
+              "eth_price": 8,
+              "usdc_p_eth_v1_withdrawal_fees": 5,
+              "yvusdc_p_eth_v1_withdrawal_fees": 6
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 17
+      },
+      "id": 36,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"rBTC-THETA\"} / 100000000",
+          "interval": "",
+          "legendFormat": "btc_c_v1_withdrawal_fees",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rBTC-THETA-v2\"} / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "btc_c_v2_fees",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"rETH-THETA\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "eth_c_v1_withdrawal_fees",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rETH-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "eth_c_v2_fees",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "usdc_p_eth_v1_withdrawal_fees",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalWithdrawalFee{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "yvusdc_p_eth_v1_withdrawal_fees",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "btc_price",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "eth_price",
+          "refId": "F"
+        }
+      ],
+      "title": "Fees Collected by Vault",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-WBTC-C Withdrawal Fees",
+            "binary": {
+              "left": "btc_c_v1_withdrawal_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "btc_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-ETH-C Withdrawal Fees",
+            "binary": {
+              "left": "eth_c_v1_withdrawal_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "btc_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-WBTC-C V2 Fees",
+            "binary": {
+              "left": "btc_c_v2_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "btc_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-ETH-C V2 Fees",
+            "binary": {
+              "left": "eth_c_v2_fees",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "eth_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "btc_c_v1_withdrawal_fees": true,
+              "btc_c_v2_fees": true,
+              "btc_price": true,
+              "eth_c_v1_withdrawal_fees": true,
+              "eth_c_v2_fees": true,
+              "eth_price": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "btc_price": "",
+              "usdc_p_eth_v1_withdrawal_fees": "T-USDC-P-ETH Withdrawal Fees",
+              "yvusdc_p_eth_v1_withdrawal_fees": "T-yvUSDC-P-ETH Withdrawal Fees"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 17
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.2.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:272",
+          "alias": "tvl_usd",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rETH-THETA\"}  / 1000000000000000000",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "rETH-THETA TVL",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_usd",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": "tvl_eth"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:244",
+          "format": "short",
+          "label": "ETH",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:245",
+          "format": "short",
+          "label": "USD",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 17
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.2.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:87",
+          "alias": "tvl_usd",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rBTC-THETA\"} / 100000000",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "rBTC-THETA TVL",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "tvl_usd",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": false
+            },
+            "indexByName": {},
+            "renameByName": {
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": "tvl_btc"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:59",
+          "format": "short",
+          "label": "BTC",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:60",
+          "format": "short",
+          "label": "USD",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 26
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "7.5.4",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"ryvUSDC-ETH-P-THETA\"} / 1000000",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "tvl",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ryvUSDC-ETH-P-THETA TVL",
+      "transformations": [],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 35
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "7.5.4",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-ETH-P-THETA\"} / 1000000",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "tvl",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "rUSDC-ETH-P-THETA TVL",
+      "transformations": [],
+      "transparent": true,
+      "type": "timeseries"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 31,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
     ],
-    "refresh": false,
-    "schemaVersion": 31,
-    "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": []
-    },
-    "time": {
-      "from": "now-6h",
-      "to": "now"
-    },
-    "timepicker": {
-      "hidden": false,
-      "refresh_intervals": [
-        "5s",
-        "10s",
-        "30s",
-        "1m",
-        "5m",
-        "15m",
-        "30m",
-        "1h",
-        "2h",
-        "1d"
-      ],
-      "time_options": [
-        "5m",
-        "15m",
-        "1h",
-        "6h",
-        "12h",
-        "24h",
-        "2d",
-        "7d",
-        "30d"
-      ],
-      "type": "timepicker"
-    },
-    "timezone": "browser",
-    "title": "Overview",
-    "uid": "cq9tEx9Gkaa1a",
-    "version": 2
-  }
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "type": "timepicker"
+  },
+  "timezone": "browser",
+  "title": "Overview",
+  "uid": "cq9tEx9Gkaa1a",
+  "version": 2
+}
