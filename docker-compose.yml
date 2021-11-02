@@ -14,9 +14,8 @@ services:
                 - "host.docker.internal:host-gateway"
 
         deribit-exporter:
-          #image: quay.io/ricardbejarano/graphql_exporter
             build:
-                context: ./prometheus
+                context: ./prometheus/deribit_exporter
                 dockerfile: Dockerfile
             container_name: deribit_exporter    
             hostname: deribit_exporter
