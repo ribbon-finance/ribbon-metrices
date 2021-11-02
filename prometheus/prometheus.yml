@@ -66,6 +66,17 @@
                 buyer
                 optionToken
               }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x0fabaf48bbf864a3947bdd0ba9d764791a60467a"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -128,6 +139,17 @@
                 sellAmount
                 buyer
                 optionToken
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x8b5876f5b0bf64056a89aa7e97511644758c3e8c"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
               }
             }
       static_configs:
@@ -192,6 +214,17 @@
                 buyer
                 optionToken
               }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x16772a7f4a3ca291c21b8ace76f9332ddffbb5ef"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -254,6 +287,17 @@
                 buyer
                 optionToken
               }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x8fe74471f198e426e96be65f40eed1f8ba96e54f"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -278,6 +322,17 @@
                   totalYieldEarned
                 }
               }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x25751853eab4d0eb3652b5eb6ecb102a2789644b"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -301,6 +356,17 @@
                   totalDeposits
                   totalYieldEarned
                 }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x65a833afdc250d9d38f8cd9bc2b1e3132db13b2f"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
               }
             }
       static_configs:
