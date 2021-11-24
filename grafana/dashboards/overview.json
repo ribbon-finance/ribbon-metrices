@@ -181,6 +181,22 @@
           "interval": "",
           "legendFormat": "ryvUSDC-ETH-P-THETA",
           "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rAAVE-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "raave_theta_v2",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "aave",
+          "refId": "J"
         }
       ],
       "timeFrom": null,
@@ -190,7 +206,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_reth-theta",
+            "alias": "rETH-THETA",
             "binary": {
               "left": "reth_theta",
               "operator": "*",
@@ -207,7 +223,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_reth-theta-v2",
+            "alias": "rETH-THETA V2",
             "binary": {
               "left": "reth_theta_v2",
               "operator": "*",
@@ -223,7 +239,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_rbtc-theta",
+            "alias": "rBTC-THETA",
             "binary": {
               "left": "rbtc-theta",
               "operator": "*",
@@ -239,7 +255,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_rbtc-theta-v2",
+            "alias": "rBTC-THETA V2",
             "binary": {
               "left": "rbtc-theta_v2",
               "operator": "*",
@@ -249,22 +265,6 @@
             "mode": "binary",
             "reduce": {
               "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "tvl_v1_usd",
-            "binary": {
-              "left": "tvl_reth-theta",
-              "operator": "+",
-              "reducer": "sum",
-              "right": "tvl_rbtc-theta"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
             },
             "replaceFields": false
           }
@@ -272,12 +272,12 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_v2_usd",
+            "alias": "rAAVE-THETA V2",
             "binary": {
-              "left": "tvl_reth-theta-v2",
-              "operator": "+",
+              "left": "raave_theta_v2",
+              "operator": "*",
               "reducer": "sum",
-              "right": "tvl_rbtc-theta-v2"
+              "right": "aave"
             },
             "mode": "binary",
             "reduce": {
@@ -288,46 +288,17 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_usd",
-            "binary": {
-              "left": "tvl_v1_usd",
-              "operator": "+",
-              "reducer": "sum",
-              "right": "tvl_v2_usd"
-            },
-            "mode": "binary",
+            "mode": "reduceRow",
             "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "binary": {
-              "left": "tvl_usd",
-              "operator": "+",
-              "reducer": "sum",
-              "right": "rUSDC-ETH-P-THETA"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": false
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "binary": {
-              "left": "tvl_usd + rUSDC-ETH-P-THETA",
-              "operator": "+",
-              "reducer": "sum",
-              "right": "ryvUSDC-ETH-P-THETA"
-            },
-            "mode": "binary",
-            "reduce": {
+              "include": [
+                "rUSDC-ETH-P-THETA",
+                "ryvUSDC-ETH-P-THETA",
+                "rETH-THETA",
+                "rETH-THETA V2",
+                "rBTC-THETA",
+                "rBTC-THETA V2",
+                "rAAVE-THETA V2"
+              ],
               "reducer": "sum"
             },
             "replaceFields": true
@@ -467,6 +438,22 @@
           "interval": "",
           "legendFormat": "T-yvUSDC-P-ETH TVL",
           "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rAAVE-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "J"
         }
       ],
       "title": "TVL By Vaults",
@@ -536,17 +523,35 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-AAVE-C V2 TVL",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
               "Total": true,
               "USDC_ETH_P_tvl": false,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
               "yvUSDC_ETH_P_tvl": false,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true
             },
@@ -656,6 +661,14 @@
           "interval": "",
           "legendFormat": "T-yvUSDC-P-ETH",
           "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rAAVE-THETA-v2\"} / 1000000000000000000) - 1",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "T-AAVE-C V2",
+          "refId": "G"
         }
       ],
       "title": "Vault Cummulative Performance",
@@ -791,6 +804,22 @@
           "interval": "",
           "legendFormat": "",
           "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rAAVE-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "J"
         }
       ],
       "title": "TVL By Assets",
@@ -798,7 +827,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_btc_v1",
+            "alias": "rBTC-THETA",
             "binary": {
               "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}",
               "operator": "*",
@@ -814,7 +843,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_btc_v2",
+            "alias": "rBTC-THETA V2",
             "binary": {
               "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}",
               "operator": "*",
@@ -830,7 +859,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_eth_v1",
+            "alias": "rETH-THETA",
             "binary": {
               "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}",
               "operator": "*",
@@ -846,7 +875,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_eth_v2",
+            "alias": "rETH-THETA V2",
             "binary": {
               "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}",
               "operator": "*",
@@ -869,8 +898,12 @@
               "reducer": "sum",
               "right": "tvl_btc_v2"
             },
-            "mode": "binary",
+            "mode": "reduceRow",
             "reduce": {
+              "include": [
+                "rBTC-THETA",
+                "rBTC-THETA V2"
+              ],
               "reducer": "sum"
             }
           }
@@ -885,8 +918,12 @@
               "reducer": "sum",
               "right": "tvl_eth_v2"
             },
-            "mode": "binary",
+            "mode": "reduceRow",
             "reduce": {
+              "include": [
+                "rETH-THETA",
+                "rETH-THETA V2"
+              ],
               "reducer": "sum"
             }
           }
@@ -901,8 +938,41 @@
               "reducer": "sum",
               "right": "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}"
             },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}",
+                "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rAAVE-THETA",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+            },
             "mode": "binary",
             "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TVL By AAVE",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "rAAVE-THETA"
+              ],
               "reducer": "sum"
             }
           }
@@ -911,8 +981,14 @@
           "id": "organize",
           "options": {
             "excludeByName": {
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
+              "rAAVE-THETA": true,
+              "rBTC-THETA": true,
+              "rBTC-THETA V2": true,
+              "rETH-THETA": true,
+              "rETH-THETA V2": true,
               "tvl_btc_v1": true,
               "tvl_btc_v2": true,
               "tvl_eth_v1": true,
@@ -921,6 +997,7 @@
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true
             },
@@ -1039,6 +1116,22 @@
           "interval": "",
           "legendFormat": "ryvUSDC-ETH-P-THETA",
           "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalNominalVolume{job=\"rAAVE-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "raave_theta_v2",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "aave_price",
+          "refId": "J"
         }
       ],
       "title": "Total Nominal Volume (USD)",
@@ -1110,6 +1203,22 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "rAAVE-THETA V2",
+            "binary": {
+              "left": "raave_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "aave_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "mode": "reduceRow",
             "reduce": {
               "include": [
@@ -1117,8 +1226,9 @@
                 "ryvUSDC-ETH-P-THETA",
                 "rETH-THETA",
                 "rETH-THETA V2",
+                "rBTC-THETA",
                 "rBTC-THETA V2",
-                "rBTC-THETA"
+                "rAAVE-THETA V2"
               ],
               "reducer": "sum"
             }
@@ -1129,13 +1239,16 @@
           "options": {
             "excludeByName": {
               "Time": false,
+              "aave_price": true,
               "btc_price": true,
               "eth_price": true,
+              "rAAVE-THETA V2": true,
               "rBTC-THETA": true,
               "rBTC-THETA V2": true,
               "rETH-THETA": true,
               "rETH-THETA V2": true,
               "rUSDC-ETH-P-THETA": true,
+              "raave_theta_v2": true,
               "rbtc_theta": true,
               "rbtc_theta_v2": true,
               "reth_theta": true,
@@ -1279,6 +1392,22 @@
           "interval": "",
           "legendFormat": "ryvUSDC-ETH-P-THETA",
           "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "query_vaults_totalNominalVolume{job=\"rAAVE-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "raave_theta_v2",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "aave_price",
+          "refId": "J"
         }
       ],
       "title": "Nomimal Volume By Vaults",
@@ -1348,10 +1477,27 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "rAAVE-THETA V2",
+            "binary": {
+              "left": "raave_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "aave_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
               "Time": false,
+              "aave_price": true,
               "btc_price": true,
               "eth_price": true,
               "rBTC-THETA": false,
@@ -1359,6 +1505,7 @@
               "rETH-THETA": false,
               "rETH-THETA V2": false,
               "rUSDC-ETH-P-THETA": false,
+              "raave_theta_v2": true,
               "rbtc_theta": true,
               "rbtc_theta_v2": true,
               "reth_theta": true,
@@ -1466,6 +1613,14 @@
         },
         {
           "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rAAVE-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "aave_c_v2_fees",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
           "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
@@ -1479,6 +1634,14 @@
           "interval": "",
           "legendFormat": "eth_price",
           "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "aave_price",
+          "refId": "J"
         }
       ],
       "title": "Total Fees Collected",
@@ -1489,7 +1652,7 @@
             "alias": "T-WBTC-C Withdrawal Fees",
             "binary": {
               "left": "btc_c_v1_withdrawal_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
               "right": "btc_price"
             },
@@ -1505,7 +1668,7 @@
             "alias": "T-ETH-C Withdrawal Fees",
             "binary": {
               "left": "eth_c_v1_withdrawal_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
               "right": "eth_price"
             },
@@ -1521,7 +1684,7 @@
             "alias": "T-WBTC-C V2 Fees",
             "binary": {
               "left": "btc_c_v2_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
               "right": "btc_price"
             },
@@ -1537,9 +1700,25 @@
             "alias": "T-ETH-C V2 Fees",
             "binary": {
               "left": "eth_c_v2_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
               "right": "eth_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-AAVE-C V2 Fees",
+            "binary": {
+              "left": "aave_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "aave_price"
             },
             "mode": "binary",
             "reduce": {
@@ -1561,7 +1740,8 @@
             "reduce": {
               "include": [
                 "T-WBTC-C V2 Fees",
-                "T-ETH-C V2 Fees"
+                "T-ETH-C V2 Fees",
+                "T-AAVE-C V2 Fees"
               ],
               "reducer": "sum"
             }
@@ -1601,11 +1781,14 @@
           "id": "organize",
           "options": {
             "excludeByName": {
+              "T-AAVE-C V2 Fees": true,
               "T-ETH-C V2 Fees": true,
               "T-ETH-C Withdrawal Fees": true,
               "T-WBTC-C V2 Fees": true,
               "T-WBTC-C Withdrawal Fees": true,
               "Time": false,
+              "aave_c_v2_fees": true,
+              "aave_price": true,
               "btc_c_v1_withdrawal_fees": true,
               "btc_c_v2_fees": true,
               "btc_price": true,
@@ -1757,6 +1940,14 @@
         },
         {
           "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rAAVE-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "aave_c_v2_fees",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
           "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
@@ -1770,6 +1961,14 @@
           "interval": "",
           "legendFormat": "eth_price",
           "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "aave_price",
+          "refId": "J"
         }
       ],
       "title": "Fees Collected by Vault",
@@ -1780,7 +1979,7 @@
             "alias": "T-WBTC-C Withdrawal Fees",
             "binary": {
               "left": "btc_c_v1_withdrawal_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
               "right": "btc_price"
             },
@@ -1796,9 +1995,9 @@
             "alias": "T-ETH-C Withdrawal Fees",
             "binary": {
               "left": "eth_c_v1_withdrawal_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
-              "right": "btc_price"
+              "right": "eth_price"
             },
             "mode": "binary",
             "reduce": {
@@ -1812,7 +2011,7 @@
             "alias": "T-WBTC-C V2 Fees",
             "binary": {
               "left": "btc_c_v2_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
               "right": "btc_price"
             },
@@ -1828,9 +2027,25 @@
             "alias": "T-ETH-C V2 Fees",
             "binary": {
               "left": "eth_c_v2_fees",
-              "operator": "+",
+              "operator": "*",
               "reducer": "sum",
               "right": "eth_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-AAVE-C V2 Fees",
+            "binary": {
+              "left": "aave_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "aave_price"
             },
             "mode": "binary",
             "reduce": {
@@ -1842,6 +2057,8 @@
           "id": "organize",
           "options": {
             "excludeByName": {
+              "aave_c_v2_fees": true,
+              "aave_price": true,
               "btc_c_v1_withdrawal_fees": true,
               "btc_c_v2_fees": true,
               "btc_price": true,
