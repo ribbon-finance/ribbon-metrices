@@ -375,5 +375,39 @@
                 timestamp
               }
             }
+    - job_name: "rAAVE-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rAAVE-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0xe63151a0ed4e5fafdc951d877102cf0977abd365"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
+            }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
