@@ -375,6 +375,8 @@
                 timestamp
               }
             }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
     - job_name: "rAAVE-THETA-v2"
       metrics_path: "/query"
       params:
