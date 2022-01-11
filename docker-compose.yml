@@ -12,6 +12,10 @@ services:
                 - theta-network
             extra_hosts:
                 - "host.docker.internal:host-gateway"
+            logging:
+                options:
+                    max-size: "10M"
+                    max-file: "1"
 
         deribit-exporter:
             build:
