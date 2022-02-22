@@ -44,7 +44,7 @@ services:
                 - ./grafana/dashboards:/var/lib/grafana/dashboards
                 - ./grafana/grafana-storage:/var/lib/grafana
             ports: 
-                - 3006:3000
+                - 3000:3000
             networks:
                 - theta-network
             extra_hosts:
