@@ -44,7 +44,7 @@ services:
                 - ./grafana/dashboards:/var/lib/grafana/dashboards
                 - ./grafana/grafana-storage:/var/lib/grafana
             ports: 
-                - 3000:3000
+                - 3006:3000
             networks:
                 - theta-network
             extra_hosts:
@@ -71,7 +71,7 @@ services:
             image: nbarrientos/cryptowat_exporter
             hostname: cryptowat
             environment: 
-                - CRYPTOWAT_PAIRS=ethusd,btcusd,aaveusd
+                - CRYPTOWAT_PAIRS=ethusd,btcusd,aaveusd,avaxusd,solusd
             ports: 
                 - 9745:9745
             networks: 
