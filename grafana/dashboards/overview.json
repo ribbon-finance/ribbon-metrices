@@ -20,12 +20,14 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
+  "gnetId": null,
   "graphTooltip": 0,
   "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
     {
+      "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 9,
@@ -37,10 +39,11 @@
         "content": "# Ribbon Vault Metrics\n- [ribbon.finance](https://ribbon.finance)\n- [Twitter](https://twitter.com/ribbonfinance)\n- [Discord](https://discord.com/invite/85gcVafPyN)\n- [Metrics](https://github.com/Lucas-Kohorst/theta-vault-metrics)\n\n### Development \nThe metrics are gathered from the [Ribbon Subgraph](https://thegraph.com/explorer/subgraph/kenchangh/ribbon-finance?query=Example%20query) and then scraped via a [graphql-exporter](https://github.com/ricardbejarano/graphql_exporter). ETH price feeds are also pulled in via [cryptowat-exporter](https://github.com/nbarrientos/cryptowat_exporter).\n\nEverything is scraped via [prometheus](https://prometheus.io/) and displayed in [grafana](https://grafana.com/)",
         "mode": "markdown"
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.2.5",
       "type": "text"
     },
     {
+      "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 7,
@@ -58,10 +61,11 @@
         "showStarred": false,
         "tags": []
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.2.5",
       "type": "dashlist"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -104,7 +108,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "datasource": {
@@ -489,6 +493,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -914,6 +919,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -926,6 +932,14 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": -100
+              },
+              {
+                "color": "green",
+                "value": 0
               }
             ]
           },
@@ -953,7 +967,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "datasource": {
@@ -1080,6 +1094,7 @@
       "type": "gauge"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1592,6 +1607,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1633,7 +1649,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "datasource": {
@@ -1979,6 +1995,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2396,6 +2413,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2437,7 +2455,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "datasource": {
@@ -2865,6 +2883,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3282,7 +3301,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 35,
+  "schemaVersion": 32,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -3322,6 +3341,5 @@
   "timezone": "browser",
   "title": "Overview",
   "uid": "cq9tEx9Gkaa1a",
-  "version": 2,
-  "weekStart": ""
+  "version": 2
 }
