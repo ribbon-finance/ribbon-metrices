@@ -21,8 +21,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
-  "iteration": 1645688607818,
+  "id": 1,
+  "iteration": 1645688108225,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -122,22 +122,22 @@
       "pluginVersion": "7.5.4",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault\"} / 1000000000000000000",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "tvl_v1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "",
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
@@ -151,59 +151,15 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_usd_v1",
-            "binary": {
-              "left": "tvl_v1",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "tvl_usd_v2",
+            "alias": "tvl_usd",
             "binary": {
               "left": "tvl_v2",
               "operator": "*",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
             },
             "mode": "binary",
             "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "tvl_usd",
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "tvl_usd_v1",
-                "tvl_usd_v2"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "tvl_aave",
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "tvl_v2",
-                "tvl_v1"
-              ],
               "reducer": "sum"
             }
           }
@@ -213,19 +169,20 @@
           "options": {
             "excludeByName": {
               "Time": false,
-              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": true,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
               "tvl_btc_v1": true,
               "tvl_btc_v2": true,
               "tvl_usd_v1": true,
               "tvl_usd_v2": true,
               "tvl_v1": true,
-              "tvl_v2": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA\", vaults=\"0\"}": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}": true
+              "tvl_v2": false,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA-v2\", vaults=\"0\"}": true
             },
             "indexByName": {},
             "renameByName": {
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA\", vaults=\"0\"}": ""
+              "tvl_v2": "tvl_eth",
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA\", vaults=\"0\"}": ""
             }
           }
         }
@@ -291,14 +248,22 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "",
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
@@ -317,7 +282,7 @@
               "left": "v2",
               "operator": "*",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
             },
             "mode": "binary",
             "reduce": {
@@ -378,6 +343,10 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_symbol{job=\"$vault-v2\"}",
           "format": "table",
@@ -484,6 +453,10 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaultShortPositions_option{job=\"$vault-v2\"}",
           "format": "table",
@@ -647,6 +620,10 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaultShortPositions_strikePrice{job=\"$vault-v2\"} / 100000000",
           "interval": "",
@@ -705,13 +682,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "AAVE Price",
+      "title": "ETH Price",
       "transparent": true,
       "type": "stat"
     },
@@ -770,7 +747,7 @@
         },
         {
           "exemplar": true,
-          "expr": "(crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"})",
+          "expr": "(crypto_currency{pair=\"ethusd\", exchange=\"kraken\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -786,7 +763,7 @@
               "left": "strike",
               "operator": "/",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
             },
             "mode": "binary",
             "reduce": {
@@ -799,7 +776,7 @@
           "id": "calculateField",
           "options": {
             "binary": {
-              "left": "strike / crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}",
+              "left": "strike / crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}",
               "operator": "-",
               "reducer": "sum",
               "right": "1"
@@ -816,7 +793,7 @@
           "options": {
             "excludeByName": {
               "Time": false,
-              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": false,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": false,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"$vault\", vaultShortPositions=\"0\"}": false
             },
             "indexByName": {},
@@ -850,7 +827,7 @@
               }
             ]
           },
-          "unit": "AAVE"
+          "unit": "ETH"
         },
         "overrides": []
       },
@@ -877,15 +854,11 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault\"} / 1000000000000000000",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "v1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
           "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "instant": true,
@@ -895,22 +868,7 @@
         }
       ],
       "title": "Vault Balance",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "v1",
-                "v2"
-              ],
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "transformations": [],
       "transparent": true,
       "type": "gauge"
     },
@@ -958,6 +916,10 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_numDepositors{job=\"$vault-v2\"}",
           "hide": false,
@@ -1043,7 +1005,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "interval": "",
           "legendFormat": "Current Price",
           "refId": "A"
@@ -1079,7 +1041,7 @@
               }
             ]
           },
-          "unit": "AAVE"
+          "unit": "ETH"
         },
         "overrides": []
       },
@@ -1108,6 +1070,10 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_totalPremiumEarned{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
@@ -1208,7 +1174,7 @@
               }
             ]
           },
-          "unit": "AAVE"
+          "unit": "ETH"
         },
         "overrides": []
       },
@@ -1237,6 +1203,10 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_totalFeeCollected{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
@@ -1292,6 +1262,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "deribit_open_interest_compared_to_vault{vault=\"$vault-v2\"}",
           "interval": "",
@@ -1299,14 +1273,10 @@
           "refId": "A"
         },
         {
-          "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault\"} / 1000000000000000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "ribbon_open_interest_v1",
-          "refId": "B"
-        },
-        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
@@ -1325,28 +1295,16 @@
       },
       "transformations": [
         {
-          "id": "calculateField",
-          "options": {
-            "alias": "ribbon_open_interest",
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "ribbon_open_interest_v1",
-                "ribbon_open_interest_v2"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
           "id": "organize",
           "options": {
             "excludeByName": {
               "ribbon_open_interest_v1": true,
-              "ribbon_open_interest_v2": true
+              "ribbon_open_interest_v2": false
             },
             "indexByName": {},
-            "renameByName": {}
+            "renameByName": {
+              "ribbon_open_interest_v2": "ribbon_open_interest"
+            }
           }
         }
       ],
@@ -1384,8 +1342,8 @@
       {
         "current": {
           "selected": false,
-          "text": "rAAVE-THETA",
-          "value": "rAAVE-THETA"
+          "text": "rstETH-THETA",
+          "value": "rstETH-THETA"
         },
         "hide": 0,
         "includeAll": false,
@@ -1394,11 +1352,11 @@
         "options": [
           {
             "selected": true,
-            "text": "rAAVE-THETA",
-            "value": "rAAVE-THETA"
+            "text": "rstETH-THETA",
+            "value": "rstETH-THETA"
           }
         ],
-        "query": "rAAVE-THETA",
+        "query": "rstETH-THETA",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -1411,8 +1369,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "rAAVE-THETA",
-  "uid": "4Z7n3yBnz",
-  "version": 1,
+  "title": "rstETH-THETA",
+  "uid": "nD6fiUBnk",
+  "version": 5,
   "weekStart": ""
 }

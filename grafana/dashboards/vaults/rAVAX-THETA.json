@@ -21,8 +21,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
-  "iteration": 1645688607818,
+  "id": 10,
+  "iteration": 1645688783747,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -131,7 +131,7 @@
         },
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"avaxusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -156,7 +156,7 @@
               "left": "tvl_v1",
               "operator": "*",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
             },
             "mode": "binary",
             "reduce": {
@@ -172,7 +172,7 @@
               "left": "tvl_v2",
               "operator": "*",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
             },
             "mode": "binary",
             "reduce": {
@@ -197,7 +197,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_aave",
+            "alias": "tvl_avax",
             "mode": "reduceRow",
             "reduce": {
               "include": [
@@ -213,19 +213,19 @@
           "options": {
             "excludeByName": {
               "Time": false,
-              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": true,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}": true,
               "tvl_btc_v1": true,
               "tvl_btc_v2": true,
               "tvl_usd_v1": true,
               "tvl_usd_v2": true,
               "tvl_v1": true,
               "tvl_v2": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA\", vaults=\"0\"}": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}": true
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rAVAX-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAVAX-THETA-v2\", vaults=\"0\"}": true
             },
             "indexByName": {},
             "renameByName": {
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA\", vaults=\"0\"}": ""
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rAVAX-THETA\", vaults=\"0\"}": ""
             }
           }
         }
@@ -292,7 +292,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"avaxusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -317,7 +317,7 @@
               "left": "v2",
               "operator": "*",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
             },
             "mode": "binary",
             "reduce": {
@@ -705,7 +705,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"avaxusd\", exchange=\"kraken\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -770,7 +770,7 @@
         },
         {
           "exemplar": true,
-          "expr": "(crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"})",
+          "expr": "(crypto_currency{pair=\"avaxusd\", exchange=\"kraken\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -786,7 +786,7 @@
               "left": "strike",
               "operator": "/",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
             },
             "mode": "binary",
             "reduce": {
@@ -799,7 +799,7 @@
           "id": "calculateField",
           "options": {
             "binary": {
-              "left": "strike / crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}",
+              "left": "strike / crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}",
               "operator": "-",
               "reducer": "sum",
               "right": "1"
@@ -816,7 +816,7 @@
           "options": {
             "excludeByName": {
               "Time": false,
-              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": false,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}": false,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"$vault\", vaultShortPositions=\"0\"}": false
             },
             "indexByName": {},
@@ -850,7 +850,7 @@
               }
             ]
           },
-          "unit": "AAVE"
+          "unit": "AVAX"
         },
         "overrides": []
       },
@@ -877,7 +877,11 @@
       "pluginVersion": "8.4.1",
       "targets": [
         {
-          "exemplar": true,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
           "expr": "query_vaults_totalBalance{job=\"$vault\"} / 1000000000000000000",
           "instant": true,
           "interval": "",
@@ -885,7 +889,11 @@
           "refId": "A"
         },
         {
-          "exemplar": true,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
           "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "instant": true,
@@ -1043,7 +1051,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"aaveusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"avaxusd\", exchange=\"kraken\"}",
           "interval": "",
           "legendFormat": "Current Price",
           "refId": "A"
@@ -1079,7 +1087,7 @@
               }
             ]
           },
-          "unit": "AAVE"
+          "unit": "AVAX"
         },
         "overrides": []
       },
@@ -1208,7 +1216,7 @@
               }
             ]
           },
-          "unit": "AAVE"
+          "unit": "AVAX"
         },
         "overrides": []
       },
@@ -1384,8 +1392,8 @@
       {
         "current": {
           "selected": false,
-          "text": "rAAVE-THETA",
-          "value": "rAAVE-THETA"
+          "text": "rAVAX-THETA",
+          "value": "rAVAX-THETA"
         },
         "hide": 0,
         "includeAll": false,
@@ -1394,11 +1402,11 @@
         "options": [
           {
             "selected": true,
-            "text": "rAAVE-THETA",
-            "value": "rAAVE-THETA"
+            "text": "rAVAX-THETA",
+            "value": "rAVAX-THETA"
           }
         ],
-        "query": "rAAVE-THETA",
+        "query": "rAVAX-THETA",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -1411,8 +1419,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "rAAVE-THETA",
-  "uid": "4Z7n3yBnz",
-  "version": 1,
+  "title": "rAVAX-THETA",
+  "uid": "_MLdW8B7z",
+  "version": 4,
   "weekStart": ""
 }

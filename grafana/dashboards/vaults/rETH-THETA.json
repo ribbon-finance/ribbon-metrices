@@ -20,15 +20,13 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1645684476971,
+  "id": 9,
+  "iteration": 1645688649207,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -117,7 +115,8 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.4",
@@ -147,8 +146,6 @@
           "refId": "C"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "TVL",
       "transformations": [
         {
@@ -200,7 +197,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_btc",
+            "alias": "tvl_eth",
             "mode": "reduceRow",
             "reduce": {
               "include": [
@@ -237,7 +234,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -292,7 +288,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -319,8 +315,6 @@
           "refId": "C"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Until 100M (USD)",
       "transformations": [
         {
@@ -375,7 +369,6 @@
       "type": "gauge"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -411,9 +404,16 @@
       },
       "id": 50,
       "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": false
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -474,7 +474,6 @@
       "type": "table"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -511,9 +510,16 @@
       },
       "id": 9,
       "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": false
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -525,8 +531,6 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Current Option",
       "transformations": [
         {
@@ -580,7 +584,6 @@
       "type": "table"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -622,7 +625,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -638,7 +641,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -680,7 +682,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -696,7 +698,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -738,7 +739,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -753,7 +754,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -797,7 +797,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -866,7 +866,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -913,7 +912,7 @@
         "showThresholdMarkers": false,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -933,8 +932,6 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Vault Balance",
       "transformations": [
         {
@@ -956,7 +953,6 @@
       "type": "gauge"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -997,7 +993,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -1017,8 +1013,6 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Number Depositors",
       "transformations": [
         {
@@ -1040,7 +1034,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1104,7 +1097,8 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.4",
@@ -1125,15 +1119,12 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Price Chart",
       "transformations": [],
       "transparent": true,
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1176,7 +1167,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -1212,7 +1203,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1265,7 +1255,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -1276,15 +1266,12 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Total Vault ROI",
       "transformations": [],
       "transparent": true,
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1328,7 +1315,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -1367,7 +1354,6 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
       "description": "Open Interest on Ribbon vs. Deribit on the Current Strike price and Expiry . \n\nNote this takes from the vault total balance and based when funds where added may not reflect the total sold",
       "fill": 1,
       "fillGradient": 0,
@@ -1395,7 +1381,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1429,9 +1415,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Ribbon vs. Deribit Open Interest",
       "tooltip": {
         "shared": true,
@@ -1468,9 +1452,7 @@
       "transparent": true,
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1478,45 +1460,34 @@
         {
           "$$hashKey": "object:57",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:58",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
-  "schemaVersion": 32,
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "rETH-THETA",
           "value": "rETH-THETA"
         },
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "vault",
         "options": [
@@ -1541,5 +1512,6 @@
   "timezone": "",
   "title": "rETH-THETA",
   "uid": "hH2ap5XGssz",
-  "version": 15
+  "version": 1,
+  "weekStart": ""
 }
