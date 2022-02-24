@@ -231,6 +231,7 @@
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
     - job_name: "ryvUSDC-ETH-P-THETA"
       metrics_path: "/query"
       params:
@@ -305,6 +306,7 @@
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
     - job_name: "rETH-THETA-v2"
       metrics_path: "/query"
       params:
@@ -341,6 +343,7 @@
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
     - job_name: "rBTC-THETA-v2"
       metrics_path: "/query"
       params:
@@ -377,6 +380,7 @@
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
     - job_name: "rAAVE-THETA-v2"
       metrics_path: "/query"
       params:
@@ -402,6 +406,191 @@
               vaultPerformanceUpdates(
                 where: { 
                   vault_contains: "0xe63151a0ed4e5fafdc951d877102cf0977abd365"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
+    - job_name: "rstETH-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rstETH-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x53773e034d9784153471813dacaff53dbbb78e8c"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
+    - job_name: "ryvUSDC-ETH-P-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "ryvUSDC-ETH-P-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0xcc323557c71c0d1d20a1861dc69c06c5f3cc9624"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
+    - job_name: "rAVAX-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rAVAX-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0x98d03125c62dae2328d9d3cb32b7b969e6a87787"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
+    - job_name: "rsAVAX-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rsAVAX-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0xd00a29f73aaF6Fc5cdaDae9cc64adc880F98fA65"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
+    - job_name: "rSOL-THETA"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://ribbon-solana.hasura.app/v1/graphql"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rSOL-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"
                 }, 
                 orderBy: timestamp, 
                 orderDirection: desc, 
