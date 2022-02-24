@@ -340,6 +340,42 @@
                 pricePerShare
                 timestamp
               }
+              vaultShortPositions(
+                where: {
+                  vault: "0x25751853eab4d0eb3652b5eb6ecb102a2789644b"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0x25751853eab4d0eb3652b5eb6ecb102a2789644b"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -376,6 +412,42 @@
               ){
                 pricePerShare
                 timestamp
+              }
+              vaultShortPositions(
+                where: {
+                  vault: "0x65a833afdc250d9d38f8cd9bc2b1e3132db13b2f"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0x65a833afdc250d9d38f8cd9bc2b1e3132db13b2f"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
               }
             }
       static_configs:
@@ -414,6 +486,42 @@
                 pricePerShare
                 timestamp
               }
+              vaultShortPositions(
+                where: {
+                  vault: "0xe63151a0ed4e5fafdc951d877102cf0977abd365"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0xe63151a0ed4e5fafdc951d877102cf0977abd365"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -450,6 +558,42 @@
               ){
                 pricePerShare
                 timestamp
+              }
+              vaultShortPositions(
+                where: {
+                  vault: "0x53773e034d9784153471813dacaff53dbbb78e8c"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0x53773e034d9784153471813dacaff53dbbb78e8c"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
               }
             }
       static_configs:
@@ -488,6 +632,42 @@
                 pricePerShare
                 timestamp
               }
+              vaultShortPositions(
+                where: {
+                  vault: "0xcc323557c71c0d1d20a1861dc69c06c5f3cc9624"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0xcc323557c71c0d1d20a1861dc69c06c5f3cc9624"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -524,6 +704,42 @@
               ){
                 pricePerShare
                 timestamp
+              }
+              vaultShortPositions(
+                where: {
+                  vault: "0x98d03125c62dae2328d9d3cb32b7b969e6a87787"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0x98d03125c62dae2328d9d3cb32b7b969e6a87787"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
               }
             }
       static_configs:
@@ -562,6 +778,42 @@
                 pricePerShare
                 timestamp
               }
+              vaultShortPositions(
+                where: {
+                  vault: "0xd00a29f73aaF6Fc5cdaDae9cc64adc880F98fA65"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0xd00a29f73aaF6Fc5cdaDae9cc64adc880F98fA65"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
+              }
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
@@ -598,6 +850,42 @@
               ){
                 pricePerShare
                 timestamp
+              }
+              vaultShortPositions(
+                where: {
+                  vault: "2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
               }
             }
       static_configs:

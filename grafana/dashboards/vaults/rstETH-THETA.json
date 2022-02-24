@@ -20,15 +20,13 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 0,
-  "id": 8,
-  "iteration": 1645683136995,
+  "id": 1,
+  "iteration": 1645688108225,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -117,96 +115,51 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.4",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault\"} / 100000000",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "tvl_v1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "",
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 100000000",
+          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "tvl_v2",
           "refId": "C"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "TVL",
       "transformations": [
         {
           "id": "calculateField",
           "options": {
-            "alias": "tvl_usd_v1",
-            "binary": {
-              "left": "tvl_v1",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "tvl_usd_v2",
+            "alias": "tvl_usd",
             "binary": {
               "left": "tvl_v2",
               "operator": "*",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
             },
             "mode": "binary",
             "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "tvl_usd",
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "tvl_usd_v1",
-                "tvl_usd_v2"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "tvl_btc",
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "tvl_v2",
-                "tvl_v1"
-              ],
               "reducer": "sum"
             }
           }
@@ -216,19 +169,20 @@
           "options": {
             "excludeByName": {
               "Time": false,
-              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
               "tvl_btc_v1": true,
               "tvl_btc_v2": true,
               "tvl_usd_v1": true,
               "tvl_usd_v2": true,
               "tvl_v1": true,
-              "tvl_v2": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true
+              "tvl_v2": false,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA-v2\", vaults=\"0\"}": true
             },
             "indexByName": {},
             "renameByName": {
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": ""
+              "tvl_v2": "tvl_eth",
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA\", vaults=\"0\"}": ""
             }
           }
         }
@@ -237,7 +191,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -292,54 +245,35 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault\"} / 100000000",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "v1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "",
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 100000000",
+          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "v2",
           "refId": "C"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Until 100M (USD)",
       "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "v1_usd",
-            "binary": {
-              "left": "v1",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": false
-          }
-        },
         {
           "id": "calculateField",
           "options": {
@@ -348,23 +282,10 @@
               "left": "v2",
               "operator": "*",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
             },
             "mode": "binary",
             "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "v1_usd",
-                "v2_usd"
-              ],
               "reducer": "sum"
             },
             "replaceFields": true
@@ -375,7 +296,6 @@
       "type": "gauge"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -411,13 +331,24 @@
       },
       "id": 50,
       "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": false
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_symbol{job=\"$vault\"}",
+          "expr": "query_vaults_symbol{job=\"$vault-v2\"}",
           "format": "table",
           "instant": false,
           "interval": "",
@@ -474,7 +405,6 @@
       "type": "table"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -511,11 +441,22 @@
       },
       "id": 9,
       "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": false
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaultShortPositions_option{job=\"$vault-v2\"}",
           "format": "table",
@@ -525,8 +466,6 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Current Option",
       "transformations": [
         {
@@ -580,7 +519,6 @@
       "type": "table"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -622,7 +560,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -638,7 +576,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -680,9 +617,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaultShortPositions_strikePrice{job=\"$vault-v2\"} / 100000000",
           "interval": "",
@@ -696,7 +637,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -738,22 +678,21 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "BTC Price",
+      "title": "ETH Price",
       "transparent": true,
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -797,7 +736,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -808,7 +747,7 @@
         },
         {
           "exemplar": true,
-          "expr": "(crypto_currency{pair=\"btcusd\", exchange=\"kraken\"})",
+          "expr": "(crypto_currency{pair=\"ethusd\", exchange=\"kraken\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -824,7 +763,7 @@
               "left": "strike",
               "operator": "/",
               "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}"
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}"
             },
             "mode": "binary",
             "reduce": {
@@ -837,7 +776,7 @@
           "id": "calculateField",
           "options": {
             "binary": {
-              "left": "strike / crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}",
+              "left": "strike / crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}",
               "operator": "-",
               "reducer": "sum",
               "right": "1"
@@ -866,13 +805,12 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "continuous-GrYlRd"
           },
-          "decimals": 5,
+          "decimals": 2,
           "mappings": [],
           "max": 100,
           "min": 2,
@@ -889,7 +827,7 @@
               }
             ]
           },
-          "unit": "currencyBTC"
+          "unit": "ETH"
         },
         "overrides": []
       },
@@ -913,19 +851,15 @@
         "showThresholdMarkers": false,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault\"} / 100000000",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "v1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 100000000",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
+          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -933,30 +867,12 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Vault Balance",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "v1",
-                "v2"
-              ],
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "transformations": [],
       "transparent": true,
       "type": "gauge"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -997,18 +913,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "query_vaults_numDepositors{job=\"$vault\"}",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "v1",
-          "refId": "A"
-        },
-        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "query_vaults_numDepositors{job=\"$vault-v2\"}",
           "hide": false,
@@ -1017,30 +928,12 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Number Depositors",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "v1",
-                "v2"
-              ],
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "transformations": [],
       "transparent": true,
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1104,14 +997,15 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.4",
       "targets": [
         {
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"btcusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"ethusd\", exchange=\"kraken\"}",
           "interval": "",
           "legendFormat": "Current Price",
           "refId": "A"
@@ -1125,15 +1019,12 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Price Chart",
       "transformations": [],
       "transparent": true,
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1150,7 +1041,7 @@
               }
             ]
           },
-          "unit": "currencyBTC"
+          "unit": "ETH"
         },
         "overrides": []
       },
@@ -1176,18 +1067,15 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalPremiumEarned{job=\"$vault\"} / 100000000",
-          "interval": "",
-          "legendFormat": "v1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "query_vaults_totalPremiumEarned{job=\"$vault-v2\"} / 100000000",
+          "expr": "query_vaults_totalPremiumEarned{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "v2",
@@ -1195,24 +1083,11 @@
         }
       ],
       "title": "Total Premium Earned",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [],
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "transformations": [],
       "transparent": true,
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1265,26 +1140,23 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "exemplar": true,
-          "expr": "((query_vaultPerformanceUpdates_pricePerShare{job=\"$vault-v2\"} / 100000000) - 1) * 100",
+          "expr": "((query_vaultPerformanceUpdates_pricePerShare{job=\"$vault-v2\"} / 1000000000000000000) - 1) * 100",
           "hide": false,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Total Vault ROI",
       "transformations": [],
       "transparent": true,
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1302,7 +1174,7 @@
               }
             ]
           },
-          "unit": "currencyBTC"
+          "unit": "ETH"
         },
         "overrides": []
       },
@@ -1328,18 +1200,15 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalWithdrawalFee{job=\"$vault\"} / 100000000",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "query_vaults_totalFeeCollected{job=\"$vault-v2\"} / 100000000",
+          "expr": "query_vaults_totalFeeCollected{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -1347,18 +1216,7 @@
         }
       ],
       "title": "Total Fee Earned",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "transformations": [],
       "transparent": true,
       "type": "stat"
     },
@@ -1367,7 +1225,6 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
       "description": "Open Interest on Ribbon vs. Deribit on the Current Strike price and Expiry . \n\nNote this takes from the vault total balance and based when funds where added may not reflect the total sold",
       "fill": 1,
       "fillGradient": 0,
@@ -1395,7 +1252,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.4.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1405,6 +1262,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
           "expr": "deribit_open_interest_compared_to_vault{vault=\"$vault-v2\"}",
           "interval": "",
@@ -1412,16 +1273,12 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault\"} / 100000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "ribbon_open_interest_v1",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 100000000",
+          "expr": "query_vaults_totalBalance{job=\"$vault-v2\"} / 1000000000000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "ribbon_open_interest_v2",
@@ -1429,9 +1286,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Ribbon vs. Deribit Open Interest",
       "tooltip": {
         "shared": true,
@@ -1440,37 +1295,23 @@
       },
       "transformations": [
         {
-          "id": "calculateField",
-          "options": {
-            "alias": "ribbon_open_interest",
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "ribbon_open_interest_v1",
-                "ribbon_open_interest_v2"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
           "id": "organize",
           "options": {
             "excludeByName": {
               "ribbon_open_interest_v1": true,
-              "ribbon_open_interest_v2": true
+              "ribbon_open_interest_v2": false
             },
             "indexByName": {},
-            "renameByName": {}
+            "renameByName": {
+              "ribbon_open_interest_v2": "ribbon_open_interest"
+            }
           }
         }
       ],
       "transparent": true,
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1478,55 +1319,44 @@
         {
           "$$hashKey": "object:57",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:58",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
-  "schemaVersion": 32,
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
-          "text": "rBTC-THETA",
-          "value": "rBTC-THETA"
+          "text": "rstETH-THETA",
+          "value": "rstETH-THETA"
         },
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "vault",
         "options": [
           {
             "selected": true,
-            "text": "rBTC-THETA",
-            "value": "rBTC-THETA"
+            "text": "rstETH-THETA",
+            "value": "rstETH-THETA"
           }
         ],
-        "query": "rBTC-THETA",
+        "query": "rstETH-THETA",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -1539,7 +1369,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "rBTC-THETA",
-  "uid": "hH2ap5XGz1",
-  "version": 1
+  "title": "rstETH-THETA",
+  "uid": "nD6fiUBnk",
+  "version": 5,
+  "weekStart": ""
 }
