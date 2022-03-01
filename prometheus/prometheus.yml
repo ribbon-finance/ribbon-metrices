@@ -22,6 +22,7 @@
                 totalPremiumEarned
                 totalWithdrawalFee
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -97,6 +98,7 @@
                 totalPremiumEarned
                 totalWithdrawalFee
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -172,6 +174,7 @@
                 totalPremiumEarned
                 totalWithdrawalFee
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -247,6 +250,7 @@
                 totalPremiumEarned
                 totalWithdrawalFee
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -322,6 +326,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -395,6 +400,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -468,6 +474,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -541,6 +548,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -614,6 +622,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -687,6 +696,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -760,6 +770,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
@@ -833,6 +844,7 @@
                 totalPremiumEarned
                 totalFeeCollected
                 totalNominalVolume
+                totalNotionalVolume
                 numDepositors
                 totalBalance
                 vaultAccounts{
