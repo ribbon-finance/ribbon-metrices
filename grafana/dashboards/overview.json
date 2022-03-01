@@ -2187,7 +2187,11 @@
                 "rbtc_theta_v2",
                 "raave_theta_v2",
                 "rsteth_theta_v2",
-                "ryvUSDC-ETH-P-THETA V2"
+                "ryvUSDC-ETH-P-THETA V2",
+                "rbtc_theta",
+                "reth_theta",
+                "ryvUSDC-ETH-P-THETA",
+                "rUSDC-ETH-P-THETA"
               ],
               "reducer": "sum"
             },
@@ -3724,8 +3728,8 @@
     "list": []
   },
   "time": {
-    "from": "2022-03-01T04:42:23.921Z",
-    "to": "2022-03-01T06:26:40.019Z"
+    "from": "now-6h",
+    "to": "now"
   },
   "timepicker": {
     "hidden": false,
