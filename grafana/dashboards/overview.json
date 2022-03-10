@@ -313,6 +313,18 @@
           "interval": "",
           "legendFormat": "sol",
           "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "P"
         }
       ],
       "title": "TVL (USD)",
@@ -477,8 +489,11 @@
                 "rBTC-THETA",
                 "rBTC-THETA V2",
                 "rAAVE-THETA V2",
+                "rstETH-THETA V2",
                 "rAVAX-THETA V2",
-                "rstETH-THETA V2"
+                "rsAVAX-THETA V2",
+                "rSOL-THETA V2",
+                "rusdc_avax_p_theta_v2"
               ],
               "reducer": "sum"
             },
@@ -730,6 +745,18 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "query_vaults_totalBalance{job=\"rSOL-THETA\"}  / 1000000000",
           "hide": false,
           "interval": "",
@@ -876,6 +903,38 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-sAVAX-C V2 TVL",
+            "binary": {
+              "left": "rsavax_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-SOL-C V2 TVL",
+            "binary": {
+              "left": "rsol_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"solusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -887,6 +946,8 @@
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"solusd\"}": true,
               "ravax_theta_v2": true,
+              "rsavax_theta_v2": true,
+              "rsol_theta_v2": true,
               "rsteth_theta_v2": true,
               "yvUSDC_ETH_P_tvl": false,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
@@ -906,7 +967,9 @@
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": 1,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": 3
             },
-            "renameByName": {}
+            "renameByName": {
+              "rusdc_avax_p_theta_v2": "T-USDC-P-AVAX"
+            }
           }
         }
       ],
@@ -1327,6 +1390,18 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "query_vaults_totalBalance{job=\"rSOL-THETA\"}  / 1000000000",
           "hide": false,
           "interval": "",
@@ -1459,6 +1534,39 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "rsAVAX-THETA V2",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rsAVAX-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rSOL-THETA",
+            "binary": {
+              "left": "{endpoint=\"https://ribbon-solana.hasura.app/v1/graphql\", instance=\"graphql-exporter:9199\", job=\"rSOL-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"solusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "alias": "TVL by BTC",
             "binary": {
               "left": "tvl_btc_v1",
@@ -1537,7 +1645,7 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "TVL By AAVE",
+            "alias": "TVL by AAVE",
             "mode": "reduceRow",
             "reduce": {
               "include": [
@@ -1554,7 +1662,22 @@
             "mode": "reduceRow",
             "reduce": {
               "include": [
-                "rAVAX-THETA V2"
+                "rAVAX-THETA V2",
+                "rsAVAX-THETA V2",
+                "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rUSDC-AVAX-P-THETA-v2\", vaults=\"0\"}"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TVL by SOLANA",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "rSOL-THETA"
               ],
               "reducer": "sum"
             }
@@ -1575,6 +1698,8 @@
               "rBTC-THETA V2": true,
               "rETH-THETA": true,
               "rETH-THETA V2": true,
+              "rSOL-THETA": true,
+              "rsAVAX-THETA V2": true,
               "rstETH-THETA V2": true,
               "tvl_btc_v1": true,
               "tvl_btc_v2": true,
@@ -1585,11 +1710,14 @@
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rAVAX-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rUSDC-AVAX-P-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rsAVAX-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA-v2\", vaults=\"0\"}": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA-v2\", vaults=\"0\"}": true
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://ribbon-solana.hasura.app/v1/graphql\", instance=\"graphql-exporter:9199\", job=\"rSOL-THETA\", vaults=\"0\"}": true
             },
             "indexByName": {},
             "renameByName": {}
@@ -1804,11 +1932,23 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalNominalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "N"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "query_vaults_totalNominalVolume{job=\"rsAVAX-THETA-v2\"}  / 1000000000000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "rsavax_theta_v2",
-          "refId": "N"
+          "refId": "R"
         },
         {
           "datasource": {
@@ -1964,11 +2104,60 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "rsAVAX-THETA",
+            "binary": {
+              "left": "rsavax_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rSOL-THETA",
+            "binary": {
+              "left": "rsol_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "sol_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rUSDC-AVAX-P-THETA-v2",
+            "binary": {
+              "left": "rusdc_avax_p_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "mode": "reduceRow",
             "reduce": {
               "include": [
                 "rUSDC-ETH-P-THETA",
                 "ryvUSDC-ETH-P-THETA",
+                "ryvUSDC-ETH-P-THETA V2",
                 "rETH-THETA",
                 "rETH-THETA V2",
                 "rBTC-THETA",
@@ -1976,7 +2165,9 @@
                 "rAAVE-THETA V2",
                 "rstETH-THETA V2",
                 "rAVAX-THETA",
-                "ryvUSDC-ETH-P-THETA V2"
+                "rsAVAX-THETA",
+                "rSOL-THETA",
+                "rUSDC-AVAX-P-THETA-v2"
               ],
               "reducer": "sum"
             },
@@ -2173,6 +2364,18 @@
           "interval": "",
           "legendFormat": "rsol_theta_v2",
           "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "C"
         }
       ],
       "title": "Total Notional Volume (USD)",
@@ -2183,15 +2386,18 @@
             "mode": "reduceRow",
             "reduce": {
               "include": [
+                "reth_theta",
                 "reth_theta_v2",
+                "rbtc_theta",
                 "rbtc_theta_v2",
+                "rUSDC-ETH-P-THETA",
+                "ryvUSDC-ETH-P-THETA",
                 "raave_theta_v2",
                 "rsteth_theta_v2",
                 "ryvUSDC-ETH-P-THETA V2",
-                "rbtc_theta",
-                "reth_theta",
-                "ryvUSDC-ETH-P-THETA",
-                "rUSDC-ETH-P-THETA"
+                "ravax_theta_v2",
+                "rsavax_theta_v2",
+                "rusdc_avax_p_theta_v2"
               ],
               "reducer": "sum"
             },
@@ -2566,6 +2772,38 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "T-sAVAX-C V2 Fees",
+            "binary": {
+              "left": "savax_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-SOL-C Fees",
+            "binary": {
+              "left": "sol_v_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "sol_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "alias": "V2 Fees",
             "binary": {
               "left": "T-WBTC-C V2 Fees",
@@ -2581,7 +2819,9 @@
                 "T-ETH-C V2 Fees",
                 "T-AAVE-C V2 Fees",
                 "T-stETH-C V2 Fees",
-                "T-AVAX-C V2 Fees"
+                "T-AVAX-C V2 Fees",
+                "T-sAVAX-C V2 Fees",
+                "T-SOL-C Fees"
               ],
               "reducer": "sum"
             }
@@ -2625,8 +2865,10 @@
               "T-AVAX-C V2 Fees": true,
               "T-ETH-C V2 Fees": true,
               "T-ETH-C Withdrawal Fees": true,
+              "T-SOL-C Fees": true,
               "T-WBTC-C V2 Fees": true,
               "T-WBTC-C Withdrawal Fees": true,
+              "T-sAVAX-C V2 Fees": true,
               "T-stETH-C V2 Fees": true,
               "T-yvUSDC-P-ETH V2 Fees": true,
               "Time": false,
@@ -2640,7 +2882,9 @@
               "eth_c_v1_withdrawal_fees": true,
               "eth_c_v2_fees": true,
               "eth_price": true,
+              "savax_c_v2_fees": true,
               "sol_price": true,
+              "sol_v_v2_fees": true,
               "steth_c_v2_fees": true,
               "usdc_p_eth_v1_withdrawal_fees": true,
               "yvusdc_p_eth_v1_withdrawal_fees": true
@@ -2911,6 +3155,18 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalNominalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "query_vaults_totalNominalVolume{job=\"rSOL-THETA\"}  / 1000000000",
           "hide": false,
           "interval": "",
@@ -3057,6 +3313,22 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "rsAVAX-THETA V2",
+            "binary": {
+              "left": "rsavax_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -3076,12 +3348,15 @@
               "rbtc_theta_v2": true,
               "reth_theta": true,
               "reth_theta_v2": true,
+              "rsavax_theta_v2": true,
               "rsteth_theta_v2": true,
               "ryvUSDC-ETH-P-THETA": false,
               "sol_price": true
             },
             "indexByName": {},
-            "renameByName": {}
+            "renameByName": {
+              "rusdc_avax_p_theta_v2": "rUSDC-AVAX-P-THETA V2"
+            }
           }
         }
       ],
@@ -3297,6 +3572,30 @@
           "interval": "",
           "legendFormat": "rSOL-THETA v2",
           "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rUSDC-AVAX-P-THETA v2",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rstETH-THETA-v2\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rstETH-THETA v2",
+          "refId": "F"
         }
       ],
       "title": "Notional Volume By Vaults",
@@ -3547,8 +3846,20 @@
           "expr": "query_vaults_totalFeeCollected{job=\"rSOL-THETA\"} / 1000000000",
           "hide": false,
           "interval": "",
-          "legendFormat": "sol_v_v2_fees",
+          "legendFormat": "sol_c_v2_fees",
           "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rUSDC-AVAX-P-THETA-v2\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2_fees",
+          "refId": "R"
         },
         {
           "datasource": {
@@ -3690,6 +4001,38 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-sAVAX-C V2 Fees",
+            "binary": {
+              "left": "savax_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-SOL-C Fees",
+            "binary": {
+              "left": "sol_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "sol_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -3703,6 +4046,8 @@
               "eth_c_v1_withdrawal_fees": true,
               "eth_c_v2_fees": true,
               "eth_price": true,
+              "savax_c_v2_fees": true,
+              "sol_c_v2_fees": true,
               "sol_price": true,
               "steth_c_v2_fees": true,
               "usdc_p_eth_v1_withdrawal_fees": false
@@ -3710,6 +4055,7 @@
             "indexByName": {},
             "renameByName": {
               "btc_price": "",
+              "rusdc_avax_p_theta_v2_fees": "T-USDC-P-AVAX V2 Fees",
               "usdc_p_eth_v1_withdrawal_fees": "T-USDC-P-ETH Withdrawal Fees",
               "yvusdc_p_eth_v1_withdrawal_fees": "T-yvUSDC-P-ETH Withdrawal Fees"
             }

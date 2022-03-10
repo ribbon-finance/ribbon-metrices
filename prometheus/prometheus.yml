@@ -829,15 +829,15 @@
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
 
-    - job_name: "rSOL-THETA"
+    - job_name: "rUSDC-AVAX-P-THETA-v2"
       metrics_path: "/query"
       params:
         endpoint:
-          ["https://ribbon-solana.hasura.app/v1/graphql"]
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax"]
         query:
           - |
             {
-              vaults(where: { symbol: "rSOL-THETA" }) {
+              vaults(where: { symbol: "rUSDC-AVAX-P-THETA" }) {
                 name
                 symbol
                 id
@@ -854,7 +854,7 @@
               }
               vaultPerformanceUpdates(
                 where: { 
-                  vault_contains: "2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"
+                  vault_contains: "0x9DD6be071b4292cc88B8190aB718329adEA3E3a3"
                 }, 
                 orderBy: timestamp, 
                 orderDirection: desc, 
@@ -865,7 +865,7 @@
               }
               vaultShortPositions(
                 where: {
-                  vault: "2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"
+                  vault: "0x9DD6be071b4292cc88B8190aB718329adEA3E3a3"
                 }
                 orderBy:expiry 
                 orderDirection: desc
@@ -887,7 +887,7 @@
               }
               vaultOptionTrades(
                 where: {
-                  vault: "2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"
+                  vault: "0x9DD6be071b4292cc88B8190aB718329adEA3E3a3"
                 }
                 orderBy:timestamp 
                 orderDirection: desc
@@ -896,6 +896,76 @@
                     symbol
                     id
                   }
+                premium
+                sellAmount
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+
+    - job_name: "rSOL-THETA"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://ribbon-solana.hasura.app/v1/graphql"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: { _eq: "rSOL-THETA" } }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts {
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: {
+                  vaultId: { _in: ["2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"] }
+                }
+                order_by: { timestamp: desc }
+                limit: 1
+              ) {
+                pricePerShare
+                timestamp
+              }
+              vaultShortPositions(
+                where: {
+                  vaultId: { _in: ["2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"] }
+                }
+                order_by: { expiry: desc }
+              ) {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vaultId: { _in: ["2YNj4egax5WV1zSgq9hwJFNzHSYZo2rU7S8BZuMdQMKW"] }
+                }
+                order_by: { timestamp: desc }
+              ) {
+                vault {
+                  symbol
+                  id
+                }
                 premium
                 sellAmount
               }
