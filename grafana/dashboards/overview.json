@@ -296,6 +296,30 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "crypto_currency{pair=\"solusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "sol",
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "P"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "crypto_currency{pair=\"avaxusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
@@ -308,11 +332,23 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"solusd\", exchange=\"kraken\"}",
+          "expr": "query_vaults_totalBalance{job=\"rAPE-THETA-v2\"}  / 1000000000000000000",
           "hide": false,
           "interval": "",
-          "legendFormat": "sol",
-          "refId": "R"
+          "legendFormat": "rape_theta_v2",
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"apeusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "ape",
+          "refId": "T"
         }
       ],
       "title": "TVL (USD)",
@@ -466,19 +502,39 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "rAPE-THETA V2",
+            "binary": {
+              "left": "rape_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "ape"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "mode": "reduceRow",
             "reduce": {
               "include": [
                 "rUSDC-ETH-P-THETA",
                 "ryvUSDC-ETH-P-THETA",
                 "ryvUSDC-ETH-P-THETA V2",
+                "rusdc_avax_p_theta_v2",
                 "rETH-THETA",
                 "rETH-THETA V2",
                 "rBTC-THETA",
                 "rBTC-THETA V2",
                 "rAAVE-THETA V2",
+                "rstETH-THETA V2",
                 "rAVAX-THETA V2",
-                "rstETH-THETA V2"
+                "rsAVAX-THETA V2",
+                "rSOL-THETA V2",
+                "rAPE-THETA V2"
               ],
               "reducer": "sum"
             },
@@ -730,6 +786,18 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "query_vaults_totalBalance{job=\"rSOL-THETA\"}  / 1000000000",
           "hide": false,
           "interval": "",
@@ -759,6 +827,30 @@
           "interval": "",
           "legendFormat": "",
           "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rAPE-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rape_theta_v2",
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"apeusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "T"
         }
       ],
       "title": "TVL By Vaults",
@@ -876,17 +968,69 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-sAVAX-C V2 TVL",
+            "binary": {
+              "left": "rsavax_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-SOL-C V2 TVL",
+            "binary": {
+              "left": "rsol_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"solusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-APE-C V2 TVL",
+            "binary": {
+              "left": "rape_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"apeusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
               "Total": true,
               "USDC_ETH_P_tvl": false,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": true,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"apeusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"solusd\"}": true,
+              "rape_theta_v2": true,
               "ravax_theta_v2": true,
+              "rsavax_theta_v2": true,
+              "rsol_theta_v2": true,
               "rsteth_theta_v2": true,
               "yvUSDC_ETH_P_tvl": false,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": true,
@@ -906,7 +1050,10 @@
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA\", vaults=\"0\"}": 1,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA\", vaults=\"0\"}": 3
             },
-            "renameByName": {}
+            "renameByName": {
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"apeusd\"}": "",
+              "rusdc_avax_p_theta_v2": "T-USDC-P-AVAX"
+            }
           }
         }
       ],
@@ -1040,6 +1187,18 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"ryvUSDC-ETH-P-THETA-v2\"} / 1000000) - 1",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "T-yvUSDC-P-ETH V2",
+          "refId": "I"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rAAVE-THETA-v2\"} / 1000000000000000000) - 1",
           "hide": false,
           "interval": "",
@@ -1064,11 +1223,11 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"ryvUSDC-ETH-P-THETA-v2\"} / 1000000) - 1",
+          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rAVAX-THETA-v2\"} / 1000000000000000000) - 1",
           "hide": false,
           "interval": "",
-          "legendFormat": "T-yvUSDC-P-ETH V2",
-          "refId": "I"
+          "legendFormat": "T-AVAX-C",
+          "refId": "J"
         },
         {
           "datasource": {
@@ -1076,11 +1235,47 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rAVAX-THETA-v2\"} / 1000000000000000000) - 1",
+          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rsAVAX-THETA-v2\"} / 1000000000000000000) - 1",
           "hide": false,
           "interval": "",
-          "legendFormat": "T-AVAX-C",
-          "refId": "J"
+          "legendFormat": "T-sAVAX-C",
+          "refId": "K"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rUSDC-AVAX-P-THETA-v2\"} / 1000000) - 1",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "T-USDC-P-AVAX",
+          "refId": "L"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rSOL-THETA\"} / 1000000000) - 1",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "T-SOL-C",
+          "refId": "M"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "(query_vaultPerformanceUpdates_pricePerShare{job=\"rAPE-THETA-v2\"} / 1000000000000000000) - 1",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "T-APE-C",
+          "refId": "N"
         }
       ],
       "title": "Vault Cummulative Performance",
@@ -1327,11 +1522,11 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "query_vaults_totalBalance{job=\"rSOL-THETA\"}  / 1000000000",
+          "expr": "query_vaults_totalBalance{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
           "hide": false,
           "interval": "",
           "legendFormat": "",
-          "refId": "O"
+          "refId": "R"
         },
         {
           "datasource": {
@@ -1351,11 +1546,47 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rSOL-THETA\"}  / 1000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "crypto_currency{pair=\"solusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "",
           "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalBalance{job=\"rAPE-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"apeusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "T"
         }
       ],
       "title": "TVL By Assets",
@@ -1459,6 +1690,71 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "rsAVAX-THETA V2",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rsAVAX-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rSOL-THETA",
+            "binary": {
+              "left": "{endpoint=\"https://ribbon-solana.hasura.app/v1/graphql\", instance=\"graphql-exporter:9199\", job=\"rSOL-THETA\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"solusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TVL by AAVE",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TVL by APE",
+            "binary": {
+              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAPE-THETA-v2\", vaults=\"0\"}",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"apeusd\"}"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "alias": "TVL by BTC",
             "binary": {
               "left": "tvl_btc_v1",
@@ -1521,27 +1817,13 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "rAAVE-THETA",
-            "binary": {
-              "left": "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "TVL By AAVE",
+            "alias": "TVL by AVAX",
             "mode": "reduceRow",
             "reduce": {
               "include": [
-                "rAAVE-THETA"
+                "rAVAX-THETA V2",
+                "rsAVAX-THETA V2",
+                "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rUSDC-AVAX-P-THETA-v2\", vaults=\"0\"}"
               ],
               "reducer": "sum"
             }
@@ -1550,11 +1832,11 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "TVL by AVAX",
+            "alias": "TVL by SOLANA",
             "mode": "reduceRow",
             "reduce": {
               "include": [
-                "rAVAX-THETA V2"
+                "rSOL-THETA"
               ],
               "reducer": "sum"
             }
@@ -1565,16 +1847,19 @@
           "options": {
             "excludeByName": {
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"aaveusd\"}": true,
+              "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"apeusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"avaxusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"btcusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"ethusd\"}": true,
               "crypto_currency{exchange=\"kraken\", instance=\"cryptowat:9745\", job=\"cryptowat\", pair=\"solusd\"}": true,
-              "rAAVE-THETA": true,
+              "rAAVE-THETA": false,
               "rAVAX-THETA V2": true,
               "rBTC-THETA": true,
               "rBTC-THETA V2": true,
               "rETH-THETA": true,
               "rETH-THETA V2": true,
+              "rSOL-THETA": true,
+              "rsAVAX-THETA V2": true,
               "rstETH-THETA V2": true,
               "tvl_btc_v1": true,
               "tvl_btc_v2": true,
@@ -1585,11 +1870,15 @@
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"rUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/kenchangh/ribbon-finance\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rAVAX-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rUSDC-AVAX-P-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-avax\", instance=\"graphql-exporter:9199\", job=\"rsAVAX-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAAVE-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rAPE-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rBTC-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rETH-THETA-v2\", vaults=\"0\"}": true,
               "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"rstETH-THETA-v2\", vaults=\"0\"}": true,
-              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA-v2\", vaults=\"0\"}": true
+              "{endpoint=\"https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2\", instance=\"graphql-exporter:9199\", job=\"ryvUSDC-ETH-P-THETA-v2\", vaults=\"0\"}": true,
+              "{endpoint=\"https://ribbon-solana.hasura.app/v1/graphql\", instance=\"graphql-exporter:9199\", job=\"rSOL-THETA\", vaults=\"0\"}": true
             },
             "indexByName": {},
             "renameByName": {}
@@ -1804,11 +2093,23 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalNominalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "N"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "query_vaults_totalNominalVolume{job=\"rsAVAX-THETA-v2\"}  / 1000000000000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "rsavax_theta_v2",
-          "refId": "N"
+          "refId": "R"
         },
         {
           "datasource": {
@@ -1845,6 +2146,30 @@
           "interval": "",
           "legendFormat": "sol_price",
           "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNominalVolume{job=\"rAPE-THETA-v2\"}  / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rape_theta_v2",
+          "refId": "T"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"apeusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "ape_price",
+          "refId": "S"
         }
       ],
       "title": "Total Nominal Volume (USD)",
@@ -1964,11 +2289,76 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "rsAVAX-THETA",
+            "binary": {
+              "left": "rsavax_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rSOL-THETA",
+            "binary": {
+              "left": "rsol_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "sol_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rUSDC-AVAX-P-THETA-v2",
+            "binary": {
+              "left": "rusdc_avax_p_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rAPE-THETA-v2",
+            "binary": {
+              "left": "rape_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "ape_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "mode": "reduceRow",
             "reduce": {
               "include": [
                 "rUSDC-ETH-P-THETA",
                 "ryvUSDC-ETH-P-THETA",
+                "ryvUSDC-ETH-P-THETA V2",
                 "rETH-THETA",
                 "rETH-THETA V2",
                 "rBTC-THETA",
@@ -1976,7 +2366,10 @@
                 "rAAVE-THETA V2",
                 "rstETH-THETA V2",
                 "rAVAX-THETA",
-                "ryvUSDC-ETH-P-THETA V2"
+                "rsAVAX-THETA",
+                "rSOL-THETA",
+                "rUSDC-AVAX-P-THETA-v2",
+                "rAPE-THETA-v2"
               ],
               "reducer": "sum"
             },
@@ -2173,6 +2566,30 @@
           "interval": "",
           "legendFormat": "rsol_theta_v2",
           "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rAPE-THETA-v2\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rape_theta_v2",
+          "refId": "F"
         }
       ],
       "title": "Total Notional Volume (USD)",
@@ -2183,15 +2600,19 @@
             "mode": "reduceRow",
             "reduce": {
               "include": [
+                "reth_theta",
                 "reth_theta_v2",
+                "rbtc_theta",
                 "rbtc_theta_v2",
+                "rUSDC-ETH-P-THETA",
+                "ryvUSDC-ETH-P-THETA",
                 "raave_theta_v2",
                 "rsteth_theta_v2",
                 "ryvUSDC-ETH-P-THETA V2",
-                "rbtc_theta",
-                "reth_theta",
-                "ryvUSDC-ETH-P-THETA",
-                "rUSDC-ETH-P-THETA"
+                "ravax_theta_v2",
+                "rsavax_theta_v2",
+                "rusdc_avax_p_theta_v2",
+                "rape_theta_v2"
               ],
               "reducer": "sum"
             },
@@ -2430,10 +2851,10 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "crypto_currency{pair=\"avaxusd\", exchange=\"kraken\"}",
+          "expr": "crypto_currency{pair=\"apeusd\", exchange=\"kraken\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "avax_price",
+          "legendFormat": "ape_price",
           "refId": "P"
         },
         {
@@ -2447,6 +2868,30 @@
           "interval": "",
           "legendFormat": "sol_price",
           "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rAPE-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "ape_c_v2_fees",
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"solusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "sol_price",
+          "refId": "R"
         }
       ],
       "title": "Total Fees Collected",
@@ -2566,6 +3011,54 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "T-sAVAX-C V2 Fees",
+            "binary": {
+              "left": "savax_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-SOL-C Fees",
+            "binary": {
+              "left": "sol_v_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "sol_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-APE-C Fees",
+            "binary": {
+              "left": "ape_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "ape_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "alias": "V2 Fees",
             "binary": {
               "left": "T-WBTC-C V2 Fees",
@@ -2581,7 +3074,8 @@
                 "T-ETH-C V2 Fees",
                 "T-AAVE-C V2 Fees",
                 "T-stETH-C V2 Fees",
-                "T-AVAX-C V2 Fees"
+                "T-SOL-C Fees",
+                "T-APE-C Fees"
               ],
               "reducer": "sum"
             }
@@ -2622,16 +3116,21 @@
           "options": {
             "excludeByName": {
               "T-AAVE-C V2 Fees": true,
+              "T-APE-C Fees": true,
               "T-AVAX-C V2 Fees": true,
               "T-ETH-C V2 Fees": true,
               "T-ETH-C Withdrawal Fees": true,
+              "T-SOL-C Fees": true,
               "T-WBTC-C V2 Fees": true,
               "T-WBTC-C Withdrawal Fees": true,
+              "T-sAVAX-C V2 Fees": true,
               "T-stETH-C V2 Fees": true,
               "T-yvUSDC-P-ETH V2 Fees": true,
               "Time": false,
               "aave_c_v2_fees": true,
               "aave_price": true,
+              "ape_c_v2_fees": true,
+              "ape_price": true,
               "avax_c_v2_fees": true,
               "avax_price": true,
               "btc_c_v1_withdrawal_fees": true,
@@ -2640,7 +3139,9 @@
               "eth_c_v1_withdrawal_fees": true,
               "eth_c_v2_fees": true,
               "eth_price": true,
+              "savax_c_v2_fees": true,
               "sol_price": true,
+              "sol_v_v2_fees": true,
               "steth_c_v2_fees": true,
               "usdc_p_eth_v1_withdrawal_fees": true,
               "yvusdc_p_eth_v1_withdrawal_fees": true
@@ -2716,7 +3217,32 @@
           },
           "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "rSOL-THETA V2"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -2911,6 +3437,18 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
+          "expr": "query_vaults_totalNominalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2",
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
           "expr": "query_vaults_totalNominalVolume{job=\"rSOL-THETA\"}  / 1000000000",
           "hide": false,
           "interval": "",
@@ -3057,6 +3595,38 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "rsAVAX-THETA V2",
+            "binary": {
+              "left": "rsavax_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "rSOL-THETA V2",
+            "binary": {
+              "left": "rsol_theta_v2",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "sol_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -3076,12 +3646,16 @@
               "rbtc_theta_v2": true,
               "reth_theta": true,
               "reth_theta_v2": true,
+              "rsavax_theta_v2": true,
+              "rsol_theta_v2": true,
               "rsteth_theta_v2": true,
               "ryvUSDC-ETH-P-THETA": false,
               "sol_price": true
             },
             "indexByName": {},
-            "renameByName": {}
+            "renameByName": {
+              "rusdc_avax_p_theta_v2": "rUSDC-AVAX-P-THETA V2"
+            }
           }
         }
       ],
@@ -3133,7 +3707,32 @@
           },
           "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "rAPE-THETA"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -3297,6 +3896,42 @@
           "interval": "",
           "legendFormat": "rSOL-THETA v2",
           "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rUSDC-AVAX-P-THETA-v2\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rUSDC-AVAX-P-THETA v2",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rstETH-THETA-v2\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rstETH-THETA v2",
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalNotionalVolume{job=\"rAPE-THETA\"}  / 100000000 / 100000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rAPE-THETA",
+          "refId": "J"
         }
       ],
       "title": "Notional Volume By Vaults",
@@ -3547,8 +4182,20 @@
           "expr": "query_vaults_totalFeeCollected{job=\"rSOL-THETA\"} / 1000000000",
           "hide": false,
           "interval": "",
-          "legendFormat": "sol_v_v2_fees",
+          "legendFormat": "sol_c_v2_fees",
           "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rUSDC-AVAX-P-THETA-v2\"} / 1000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rusdc_avax_p_theta_v2_fees",
+          "refId": "R"
         },
         {
           "datasource": {
@@ -3573,6 +4220,30 @@
           "interval": "",
           "legendFormat": "sol_price",
           "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "query_vaults_totalFeeCollected{job=\"rAPE-THETA-v2\"} / 1000000000000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "ape_c_v2_fees",
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "crypto_currency{pair=\"apeusd\", exchange=\"kraken\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "ape_price",
+          "refId": "T"
         }
       ],
       "title": "Fees Collected by Vault",
@@ -3690,11 +4361,61 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-sAVAX-C V2 Fees",
+            "binary": {
+              "left": "savax_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "avax_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-SOL-C Fees",
+            "binary": {
+              "left": "sol_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "sol_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "T-APE-C Fees",
+            "binary": {
+              "left": "ape_c_v2_fees",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "ape_price"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
               "aave_c_v2_fees": true,
               "aave_price": true,
+              "ape_c_v2_fees": true,
+              "ape_price": true,
               "avax_c_v2_fees": true,
               "avax_price": true,
               "btc_c_v1_withdrawal_fees": true,
@@ -3703,6 +4424,8 @@
               "eth_c_v1_withdrawal_fees": true,
               "eth_c_v2_fees": true,
               "eth_price": true,
+              "savax_c_v2_fees": true,
+              "sol_c_v2_fees": true,
               "sol_price": true,
               "steth_c_v2_fees": true,
               "usdc_p_eth_v1_withdrawal_fees": false
@@ -3710,6 +4433,7 @@
             "indexByName": {},
             "renameByName": {
               "btc_price": "",
+              "rusdc_avax_p_theta_v2_fees": "T-USDC-P-AVAX V2 Fees",
               "usdc_p_eth_v1_withdrawal_fees": "T-USDC-P-ETH Withdrawal Fees",
               "yvusdc_p_eth_v1_withdrawal_fees": "T-yvUSDC-P-ETH Withdrawal Fees"
             }
