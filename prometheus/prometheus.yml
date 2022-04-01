@@ -972,3 +972,76 @@
             }
       static_configs:
         - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
+    - job_name: "rAPE-THETA-v2"
+      metrics_path: "/query"
+      params:
+        endpoint:
+          ["https://api.thegraph.com/subgraphs/name/ribbon-finance/ribbon-v2"]
+        query:
+          - |
+            {
+              vaults(where: { symbol: "rAPE-THETA" }) {
+                name
+                symbol
+                id
+                totalPremiumEarned
+                totalFeeCollected
+                totalNominalVolume
+                totalNotionalVolume
+                numDepositors
+                totalBalance
+                vaultAccounts{
+                  totalDeposits
+                  totalYieldEarned
+                }
+              }
+              vaultPerformanceUpdates(
+                where: { 
+                  vault_contains: "0xc0cF10Dd710aefb209D9dc67bc746510ffd98A53"
+                }, 
+                orderBy: timestamp, 
+                orderDirection: desc, 
+                first: 1
+              ){
+                pricePerShare
+                timestamp
+              }
+              vaultShortPositions(
+                where: {
+                  vault: "0xc0cF10Dd710aefb209D9dc67bc746510ffd98A53"
+                }
+                orderBy:expiry 
+                orderDirection: desc
+              )  {
+                vault {
+                  symbol
+                  id
+                }
+                strikePrice
+                option
+                openedAt
+                closedAt
+                premiumEarned
+                openTxhash 
+                closeTxhash
+                expiry
+                loss
+                withdrawAmount
+              }
+              vaultOptionTrades(
+                where: {
+                  vault: "0xc0cF10Dd710aefb209D9dc67bc746510ffd98A53"
+                }
+                orderBy:timestamp 
+                orderDirection: desc
+              ) {
+                vault {
+                    symbol
+                    id
+                  }
+                premium
+                sellAmount
+              }
+            }
+      static_configs:
+        - targets: ["graphql-exporter:9199"] # graphql_exporter address:port
